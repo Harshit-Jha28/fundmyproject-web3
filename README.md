@@ -1,8 +1,8 @@
-# 🎓 EduFundX (fundmyproject-web3)
+#  EduFundX (fundmyproject-web3)
 
 > Empowering student innovation through decentralized, milestone-based funding on the Stellar Soroban blockchain.
 
-## 🌟 Overview
+##  Overview
 
 EduFundX is a decentralized crowdfunding platform built on **Stellar Soroban** that enables students to raise funds for innovative projects in a transparent and trustless manner.
 
@@ -15,12 +15,13 @@ Unlike traditional crowdfunding systems, EduFundX leverages smart contracts to:
 * Enable global participation through XLM payments
 
 The platform bridges education, innovation, and Web3 technology to create a secure ecosystem for student entrepreneurship.
-
+Live App Link:- https://fundmyproject-web3.vercel.app
+Smart Contract Deployed Link:- https://stellar.expert/explorer/testnet/contract/CBLODSR4ZY45EC6WOJPLUKYJIM2WKT5WEEHGQW3ZKOFIE3NAQJOT5SCB
 ---
 
-## ✨ Features
+##  Features
 
-### 👨‍🎓 Student Portal
+###  Student Portal
 
 * Create and manage projects
 * Set funding goals
@@ -29,7 +30,7 @@ The platform bridges education, innovation, and Web3 technology to create a secu
 * Track funding progress
 * Receive milestone-based payouts
 
-### 💰 Sponsor Portal
+###  Sponsor Portal
 
 * Browse active projects
 * Fund projects using XLM
@@ -37,7 +38,7 @@ The platform bridges education, innovation, and Web3 technology to create a secu
 * Track sponsorship history
 * Verify fund utilization transparently
 
-### 🔐 Smart Contract Infrastructure
+###  Smart Contract Infrastructure
 
 * Core Project Registry
 * Escrow-based fund management
@@ -222,6 +223,26 @@ Student Receives Funding
 ```
 
 ---
+Wallet Connected State
+<img width="1920" height="1080" alt="Screenshot (321)" src="https://github.com/user-attachments/assets/75a4f330-2fb3-4480-9d96-0547d5c1023f" />
+
+Balance Displayed 
+<img width="1920" height="1080" alt="Screenshot (322)" src="https://github.com/user-attachments/assets/9b557b6f-650b-4bbe-a5e9-535f009d4c4f" />
+
+Succesful Testnet Transaction
+<img width="1920" height="1080" alt="Screenshot (323)" src="https://github.com/user-attachments/assets/68c191be-3e0e-4601-bb76-4a7d4ff87532" />
+
+Transaction History
+<img width="1920" height="1080" alt="Screenshot (326)" src="https://github.com/user-attachments/assets/eb002fd1-d28c-4afb-a6a4-a31ce290c21a" />
+
+Deployed Contract
+<img width="1920" height="1080" alt="Screenshot (324)" src="https://github.com/user-attachments/assets/9b910801-c5b0-45e5-8580-0aec98f107a4" />
+
+Test Cases Passed
+<img width="1920" height="1080" alt="Screenshot (325)" src="https://github.com/user-attachments/assets/ba80c7c8-54c2-468f-a9e4-b5821edb1606" />
+
+
+
 
 ## 🛣️ Roadmap
 
