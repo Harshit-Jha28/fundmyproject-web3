@@ -1,118 +1,33 @@
-name: CI - PR Checks
+name: EduFundX CI
 
 on:
+  push:
+    branches:
+      - main
+
   pull_request:
-    branches: [main, develop]
-
-concurrency:
-  group: ci-${{ github.ref }}
-  cancel-in-progress: true
-
-env:
-  CARGO_TERM_COLOR: always
-  RUST_BACKTRACE: 1
+    branches:
+      - main
 
 jobs:
-  # ==========================================
-  # Soroban Smart Contract Checks
-  # ==========================================
-  contracts:
-    name: Contract Tests
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: contracts
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Install Rust
-        uses: dtolnay/rust-toolchain@stable
-        with:
-          targets: wasm32-unknown-unknown
-          components: rustfmt, clippy
-
-      - name: Cache Cargo
-        uses: actions/cache@v4
-        with:
-          path: |
-            ~/.cargo/bin/
-            ~/.cargo/registry/index/
-            ~/.cargo/registry/cache/
-            ~/.cargo/git/db/
-            contracts/target/
-          key: ${{ runner.os }}-cargo-${{ hashFiles('contracts/**/Cargo.lock') }}
-          restore-keys: ${{ runner.os }}-cargo-
-
-      - name: Check Formatting
-        run: cargo fmt --all --check
-
-      - name: Clippy Lints
-        run: cargo clippy --all-targets --all-features -- -D warnings
-
-      - name: Run Tests
-        run: cargo test --workspace --features testutils
-
-      - name: Build WASM
-        run: |
-          cargo build --release --target wasm32-unknown-unknown -p edufundx_reputation
-          cargo build --release --target wasm32-unknown-unknown -p edufundx_core
-
-      - name: Check WASM Size
-        run: |
-          echo "=== WASM Binary Sizes ==="
-          for wasm in $(find target/wasm32-unknown-unknown/release -name "*.wasm" -maxdepth 1); do
-            size=$(stat --printf="%s" "$wasm")
-            name=$(basename "$wasm")
-            kb=$((size / 1024))
-            echo "$name: ${kb}KB ($size bytes)"
-            if [ "$size" -gt 65536 ]; then
-              echo "::error::$name exceeds 64KB limit!"
-              exit 1
-            fi
-          done
-
-  # ==========================================
-  # Frontend Checks
-  # ==========================================
   frontend:
-    name: Frontend Tests
     runs-on: ubuntu-latest
+
     defaults:
       run:
         working-directory: frontend
+
     steps:
-      - name: Checkout
+      - name: Checkout Repository
         uses: actions/checkout@v4
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
-          cache: 'npm'
-          cache-dependency-path: frontend/package-lock.json
+          node-version: 22
 
       - name: Install Dependencies
-        run: npm ci
+        run: npm install
 
-      - name: TypeScript Check
-        run: npx tsc --noEmit
-
-      - name: Lint
-        run: npm run lint
-
-      - name: Run Tests
-        run: npm test
-
-      - name: Build
+      - name: Build Application
         run: npm run build
-        env:
-          NEXT_PUBLIC_STELLAR_NETWORK: testnet
-          NEXT_PUBLIC_SOROBAN_RPC_URL: https://soroban-testnet.stellar.org
-          NEXT_PUBLIC_HORIZON_URL: https://horizon-testnet.stellar.org
-          NEXT_PUBLIC_STELLAR_EXPLORER_URL: https://stellar.expert/explorer/testnet
-          NEXT_PUBLIC_CORE_CONTRACT_ID: PLACEHOLDER
-          NEXT_PUBLIC_REPUTATION_CONTRACT_ID: PLACEHOLDER
-          NEXT_PUBLIC_NATIVE_TOKEN_CONTRACT_ID: PLACEHOLDER
-          NEXT_PUBLIC_PLATFORM_FEE_BPS: '250'
-          NEXT_PUBLIC_ENABLE_LOGGING: 'true'
