@@ -288,6 +288,20 @@ impl EduFundXCore {
         get_milestone_contract(&env)
     }
 
+    /// Retrieve all projects registered by a specific student owner address
+    pub fn get_projects_by_owner(env: Env, owner: Address) -> soroban_sdk::Vec<Project> {
+        let count = get_project_count(&env);
+        let mut result = soroban_sdk::Vec::new(&env);
+        for i in 1..=count {
+            if let Ok(project) = get_project(&env, i) {
+                if project.student == owner {
+                    result.push_back(project);
+                }
+            }
+        }
+        result
+    }
+
     // ----- Reputation Forwarding (Escrow/Milestone-only) ---------------------
 
     pub fn record_contribution_rep(

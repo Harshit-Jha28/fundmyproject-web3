@@ -156,7 +156,11 @@ export async function simulateReadOnlyCall(
   args: StellarSdk.xdr.ScVal[]
 ): Promise<StellarSdk.xdr.ScVal> {
   const server = getSorobanServer();
-  const dummyAddress = "GCAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA──────────────────WHF"; // A valid dummy public key
+  const dummyAddress = "GD7VZJCNHRNXQNEALGZBHQVMJOM7G5S3ZOUQBI3LNBKS2G4G64EXZWNZ";
+
+  if (!StellarSdk.StrKey.isValidEd25519PublicKey(dummyAddress)) {
+    throw new Error(`Invalid Stellar address: ${dummyAddress}`);
+  }
 
   const contract = new StellarSdk.Contract(contractId);
   const op = contract.call(functionName, ...args);
@@ -171,14 +175,26 @@ export async function simulateReadOnlyCall(
     .build();
 
   const simulation = await server.simulateTransaction(tx);
-  if (StellarSdk.rpc.Api.isSimulationError(simulation)) {
-    throw new Error(`Simulation error for ${functionName}: ${JSON.stringify(simulation)}`);
-  }
 
-  const sim = simulation as any;
-  if (!sim.results || sim.results.length === 0 || !sim.results[0].xdr) {
-    throw new Error(`No return value from simulation for ${functionName}`);
-  }
+if (StellarSdk.rpc.Api.isSimulationError(simulation)) {
+  throw new Error(
+    `Simulation error for ${functionName}: ${JSON.stringify(simulation)}`
+  );
+}
 
+const sim = simulation as any;
+
+// New SDK format
+if (sim.result?.retval) {
+  return sim.result.retval;
+}
+
+// Old SDK format
+if (sim.results?.length > 0 && sim.results[0].xdr) {
   return StellarSdk.xdr.ScVal.fromXDR(sim.results[0].xdr, "base64");
+}
+
+throw new Error(
+  `No return value from ${functionName} on contract ${contractId}. Response: ${JSON.stringify(simulation)}`
+);
 }

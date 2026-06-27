@@ -1,0 +1,14 @@
+{
+    "rpc_url":  "https://soroban-testnet.stellar.org",
+    "network":  "testnet",
+    "deployer":  "GD7VZJCNHRNXQNEALGZBHQVMJOM7G5S3ZOUQBI3LNBKS2G4G64EXZWNZ",
+    "contracts":  {
+                      "core":  "CCPW5IFW3IAIDIVWZHKRSPHBI2KWVRCWH2URDALWFAH7DMFKNSPOYDKU",
+                      "native_token":  "CDLZFC3SYJYDZT7K67VZ75HPJVIEUVNIXF47ZG2FB2RMQQVU2HHGCYSC",
+                      "reputation":  "CA2ZOVD5ZFPVW5SHV5OJIPWX74SEWCGK5DWVB4TVKHJ7SROL63KRB3I6",
+                      "escrow":  "CARGM6NYEG3DARCJAS7CILENG4MTOCYO4VRWKCCC5AS6P7RPEBWDTT6T",
+                      "milestone":  "CDUBNPJTB2KSD5XGFUHLIGTQGA7WTXPYKP3YZ7A75N5VCB2MVI4HB676"
+                  },
+    "admin":  "GCED34XAO5A77S3L3HLAMPNIFRP73P6MMEOEFCEN5OJ2LKRSPAOYXVPZ",
+    "deployed_at":  "2026-06-27T18:21:09Z"
+}

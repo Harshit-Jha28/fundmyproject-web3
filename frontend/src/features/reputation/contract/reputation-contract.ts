@@ -7,9 +7,9 @@ export class ReputationContract {
 
   // Retrieve student reputation from contract
   static async getStudentReputation(studentAddress: string): Promise<StudentReputation> {
-    if (!this.contractId) throw new Error("REPUTATION_CONTRACT_ID is not configured");
-
     try {
+      if (!this.contractId) throw new Error("REPUTATION_CONTRACT_ID is not configured");
+
       const resultScVal = await simulateReadOnlyCall(
         this.contractId,
         "get_student_reputation",
@@ -28,7 +28,7 @@ export class ReputationContract {
         lastUpdated: Date.now(),
       };
     } catch (err) {
-      console.error(`Error fetching student reputation:`, err);
+      console.warn("Reputation query unavailable. Falling back to 0. Error details:", err);
       return {
         address: studentAddress,
         score: 0,
@@ -43,9 +43,9 @@ export class ReputationContract {
 
   // Retrieve sponsor reputation from contract
   static async getSponsorReputation(sponsorAddress: string): Promise<SponsorReputation> {
-    if (!this.contractId) throw new Error("REPUTATION_CONTRACT_ID is not configured");
-
     try {
+      if (!this.contractId) throw new Error("REPUTATION_CONTRACT_ID is not configured");
+
       const resultScVal = await simulateReadOnlyCall(
         this.contractId,
         "get_sponsor_reputation",
@@ -64,7 +64,7 @@ export class ReputationContract {
         lastUpdated: Date.now(),
       };
     } catch (err) {
-      console.error(`Error fetching sponsor reputation:`, err);
+      console.warn("Reputation query unavailable. Falling back to 0. Error details:", err);
       return {
         address: sponsorAddress,
         score: 0,

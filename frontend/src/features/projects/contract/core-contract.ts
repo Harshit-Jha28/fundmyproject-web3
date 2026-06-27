@@ -68,20 +68,28 @@ export class CoreRegistryContract {
   }
 
   // Retrieve total count of projects from registry contract
-  static async getProjectCount(): Promise<number> {
-    if (!this.contractId) return 0;
+static async getProjectCount(): Promise<number> {
+  if (!this.contractId) return 0;
 
-    try {
-      const resultScVal = await simulateReadOnlyCall(
-        this.contractId,
-        "get_project_count",
-        []
-      );
-      return Number(parseScVal(resultScVal));
-    } catch {
-      return 0;
-    }
+  try {
+    const resultScVal = await simulateReadOnlyCall(
+      this.contractId,
+      "get_project_count",
+      []
+    );
+
+    console.log("RAW SCVAL:", resultScVal);
+
+    const parsed = parseScVal(resultScVal);
+
+    console.log("PARSED COUNT:", parsed);
+
+    return Number(parsed);
+  } catch (err) {
+    console.error("GET PROJECT COUNT ERROR:", err);
+    throw err;
   }
+}
 
   // Build transaction to create a project
   static async createProjectTx(

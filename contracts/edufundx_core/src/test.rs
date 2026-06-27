@@ -143,3 +143,35 @@ fn test_update_project_status_authorization() {
     let project = core_client.get_project(&proj_id);
     assert_eq!(project.status, ProjectStatus::Cancelled);
 }
+
+#[test]
+fn test_get_projects_by_owner() {
+    let (env, core_client, _rep_client, _admin, _rep_id, _token) = setup();
+    let student_a = Address::generate(&env);
+    let student_b = Address::generate(&env);
+
+    let title_1 = String::from_str(&env, "Project 1");
+    let title_2 = String::from_str(&env, "Project 2");
+    let title_3 = String::from_str(&env, "Project 3");
+    
+    let desc = String::from_str(&env, "Desc");
+    let cat = String::from_str(&env, "Cat");
+    let goal = 1000_i128;
+
+    // student A creates 2 projects
+    let id1 = core_client.create_project(&student_a, &title_1, &desc, &cat, &goal);
+    let id2 = core_client.create_project(&student_a, &title_2, &desc, &cat, &goal);
+    
+    // student B creates 1 project
+    let id3 = core_client.create_project(&student_b, &title_3, &desc, &cat, &goal);
+
+    let projects_a = core_client.get_projects_by_owner(&student_a);
+    let projects_b = core_client.get_projects_by_owner(&student_b);
+
+    assert_eq!(projects_a.len(), 2);
+    assert_eq!(projects_b.len(), 1);
+    
+    assert_eq!(projects_a.get(0).unwrap().id, id1);
+    assert_eq!(projects_a.get(1).unwrap().id, id2);
+    assert_eq!(projects_b.get(0).unwrap().id, id3);
+}
