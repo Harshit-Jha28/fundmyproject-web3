@@ -1,0 +1,11 @@
+[workspace]
+resolver = "2"
+members = [
+    "edufundx_core",
+    "edufundx_reputation",
+    "edufundx_escrow",
+    "edufundx_milestone",
+]
+
+[workspace.dependencies]
+soroban-sdk = "26"

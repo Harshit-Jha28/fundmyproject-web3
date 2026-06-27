@@ -1,0 +1,54 @@
+# =========================
+# Rust / Soroban Contracts
+# =========================
+contracts/target/
+contracts/**/target/
+**/*.wasm
+!contracts/**/test_snapshots/**/*.wasm
+
+# =========================
+# Node.js / Next.js Frontend
+# =========================
+frontend/node_modules/
+frontend/.next/
+frontend/out/
+frontend/.vercel/
+frontend/coverage/
+
+# =========================
+# Environment Variables
+# =========================
+.env
+.env.local
+.env.*.local
+
+# =========================
+# OS Files
+# =========================
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# =========================
+# IDE / Editor
+# =========================
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# =========================
+# Build Artifacts
+# =========================
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# =========================
+# Stellar CLI
+# =========================
+.stellar/
+.soroban/
+*.tsbuildinfo
