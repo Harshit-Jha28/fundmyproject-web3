@@ -16,6 +16,8 @@ Unlike traditional crowdfunding systems, EduFundX leverages smart contracts to:
 
 The platform bridges education, innovation, and Web3 technology to create a secure ecosystem for student entrepreneurship.
 Live App Link:- https://fundmyproject-web3.vercel.app
+
+
 Smart Contract Deployed Link:- https://stellar.expert/explorer/testnet/contract/CBLODSR4ZY45EC6WOJPLUKYJIM2WKT5WEEHGQW3ZKOFIE3NAQJOT5SCB
 ---
 
