@@ -243,6 +243,8 @@ Deployed Contract
 Test Cases Passed
 <img width="1920" height="1080" alt="Screenshot (325)" src="https://github.com/user-attachments/assets/ba80c7c8-54c2-468f-a9e4-b5821edb1606" />
 
+Mobile Responsive View
+<img width="720" height="1600" alt="e24493b4-12fd-48a5-a269-ec158ab5847f" src="https://github.com/user-attachments/assets/7144d529-1e9d-44fb-87ae-6dc558fc9dc5" />
 
 
 
