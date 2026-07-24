@@ -18,7 +18,7 @@ export default function HomePage() {
             <span className="neo-badge bg-white shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] text-xs font-black">
               ★ Soroban Mainnet Beta Launch Ready
             </span>
-            <h1 className="text-5xl md:text-7xl font-black tracking-tighter uppercase leading-[0.9] text-black">
+            <h1 className="text-3xl sm:text-5xl md:text-7xl font-black tracking-tighter uppercase leading-[0.9] text-black">
               FUND YOUR <br />
               <span className="text-transparent" style={{ WebkitTextStroke: "2px black" }}>
                 ACADEMIC
@@ -30,18 +30,18 @@ export default function HomePage() {
               EduFundX connects talented students with sponsors worldwide. Transparent, milestone-based funding secured by the Stellar Soroban smart contract ecosystem.
             </p>
             <div className="flex flex-wrap gap-4 mt-2">
-              <Link href="/marketplace" className="neo-btn-black text-lg py-4 px-8 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[4px] hover:translate-y-[4px] hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+              <Link href="/marketplace" className="neo-btn-black text-sm sm:text-lg py-3 px-5 sm:py-4 sm:px-8 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] sm:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] sm:hover:translate-x-[4px] sm:hover:translate-y-[4px] sm:hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
                 Browse Projects
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Link>
-              <Link href="/projects/create" className="neo-btn-white text-lg py-4 px-8 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
+              <Link href="/projects/create" className="neo-btn-white text-sm sm:text-lg py-3 px-5 sm:py-4 sm:px-8 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] sm:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-[1px_1px_0px_0px_rgba(0,0,0,1)] sm:hover:translate-x-[2px] sm:hover:translate-y-[2px] sm:hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
                 Submit Project
               </Link>
             </div>
           </div>
 
           {/* Right Column: Browser Mockup */}
-          <div className="neo-browser w-full max-w-xl mx-auto">
+          <div className="neo-browser w-full max-w-xl mx-auto hidden lg:block">
             <div className="neo-browser-header">
               <div className="neo-dot-red"></div>
               <div className="neo-dot-yellow"></div>
@@ -93,7 +93,7 @@ export default function HomePage() {
       <section className="bg-white py-20 px-6 md:px-12 border-b-2 border-black">
         <div className="max-w-7xl mx-auto flex flex-col gap-12">
           <div className="text-center max-w-2xl mx-auto flex flex-col gap-2">
-            <h2 className="text-4xl md:text-5xl font-black uppercase tracking-tight">
+            <h2 className="text-2xl sm:text-4xl md:text-5xl font-black uppercase tracking-tight">
               Tackling Funding Transparency
             </h2>
             <p className="font-bold text-gray-600">
@@ -146,7 +146,7 @@ export default function HomePage() {
       {/* Feature Grid */}
       <section className="neo-yellow-bg py-20 px-6 md:px-12 border-b-2 border-black">
         <div className="max-w-7xl mx-auto flex flex-col gap-12">
-          <h2 className="text-4xl md:text-5xl font-black uppercase text-center tracking-tight">
+          <h2 className="text-2xl sm:text-4xl md:text-5xl font-black uppercase text-center tracking-tight">
             PLATFORM FEATURES
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -186,34 +186,34 @@ export default function HomePage() {
       {/* Bento Personas Section */}
       <section className="bg-white py-20 px-6 md:px-12 border-b-2 border-black">
         <div className="max-w-7xl mx-auto flex flex-col gap-12">
-          <h2 className="text-4xl md:text-5xl font-black uppercase tracking-tight text-center">
+          <h2 className="text-2xl sm:text-4xl md:text-5xl font-black uppercase tracking-tight text-center">
             WHO IS IT FOR?
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="neo-box p-8 bg-[#b7c6c2] flex flex-col justify-between min-h-[300px]">
+            <div className="neo-box p-8 bg-[#b7c6c2] flex flex-col justify-between min-h-[200px] sm:min-h-[300px]">
               <span className="neo-badge bg-white self-start">STUDENTS</span>
               <div className="flex flex-col gap-2 mt-8">
-                <h3 className="text-3xl font-black uppercase">Publish Proposals</h3>
+                <h3 className="text-2xl sm:text-3xl font-black uppercase">Publish Proposals</h3>
                 <p className="font-bold text-black/80">
                   Showcase your academic thesis, build research prototypes, and request transparent sponsor support.
                 </p>
               </div>
             </div>
 
-            <div className="neo-box-large p-8 bg-[#ffe17c] flex flex-col justify-between min-h-[300px]">
+            <div className="neo-box-large p-8 bg-[#ffe17c] flex flex-col justify-between min-h-[200px] sm:min-h-[300px]">
               <span className="neo-badge bg-white self-start">SPONSORS</span>
               <div className="flex flex-col gap-2 mt-8">
-                <h3 className="text-3xl font-black uppercase">Direct Sponsorship</h3>
+                <h3 className="text-2xl sm:text-3xl font-black uppercase">Direct Sponsorship</h3>
                 <p className="font-black">
                   Directly fund student proposals, review proof of completions, and support Web3 academic innovation.
                 </p>
               </div>
             </div>
 
-            <div className="neo-box p-8 bg-[#171e19] text-white flex flex-col justify-between min-h-[300px] border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+            <div className="neo-box p-8 bg-[#171e19] text-white flex flex-col justify-between min-h-[200px] sm:min-h-[300px] border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
               <span className="neo-badge bg-white text-black self-start">MENTORS</span>
               <div className="flex flex-col gap-2 mt-8">
-                <h3 className="text-3xl font-black uppercase">Review Proofs</h3>
+                <h3 className="text-2xl sm:text-3xl font-black uppercase">Review Proofs</h3>
                 <p className="font-bold text-white/80">
                   Act as a validator, verify milestone delivery proofs, and authorize fund releases from the smart contracts.
                 </p>

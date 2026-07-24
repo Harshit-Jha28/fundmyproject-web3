@@ -49,7 +49,7 @@ export default function CreateProjectPage() {
       <main className="max-w-3xl mx-auto px-6 mt-12">
         <div className="neo-box p-8 bg-white flex flex-col gap-6">
           <div className="border-b-2 border-black pb-4">
-            <h1 className="text-3xl font-black uppercase tracking-tight">Submit Project Proposal</h1>
+            <h1 className="text-xl sm:text-3xl font-black uppercase tracking-tight">Submit Project Proposal</h1>
             <p className="font-bold text-gray-600 mt-1">
               Publish your project on-chain to receive transparent, milestone-based sponsorship.
             </p>

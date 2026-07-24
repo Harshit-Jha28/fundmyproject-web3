@@ -244,4 +244,41 @@
     background-color: #ffffff;
     color: #000000;
   }
+
+  /* Mobile responsive adjustments */
+  @media (max-width: 640px) {
+    .neo-box {
+      box-shadow: 2px 2px 0px 0px #000000;
+    }
+    .neo-box-large {
+      box-shadow: 4px 4px 0px 0px #000000;
+    }
+    .neo-btn, .neo-btn-black, .neo-btn-sage, .neo-btn-white {
+      box-shadow: 2px 2px 0px 0px #000000;
+      padding: 0.5rem 1rem;
+    }
+    .neo-btn:hover, .neo-btn-black:hover, .neo-btn-sage:hover, .neo-btn-white:hover {
+      transform: translate(1px, 1px);
+      box-shadow: 1px 1px 0px 0px #000000;
+    }
+    .neo-browser {
+      box-shadow: 4px 4px 0px 0px #000000;
+    }
+    .neo-input {
+      box-shadow: 1px 1px 0px 0px #000000;
+    }
+    .neo-input:focus {
+      box-shadow: 2px 2px 0px 0px #000000;
+      transform: translate(-1px, -1px);
+    }
+  }
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  animation: marquee 20s linear infinite;
 }

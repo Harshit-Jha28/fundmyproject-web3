@@ -7,6 +7,7 @@ import { useProjects } from "@/features/projects/hooks/use-projects";
 import { useWallet } from "@/features/wallet/hooks";
 import { useStudentReputation, useSponsorReputation } from "@/features/reputation/hooks/use-reputation";
 import { WalletInfo } from "@/features/wallet/ui/WalletInfo";
+import { RecentTransactions } from "@/features/wallet/ui/RecentTransactions";
 import { Loader2, Coins, ArrowUpRight, Award, Plus, FolderHeart, Landmark } from "lucide-react";
 import { getStatusColor, getStatusLabel } from "@/shared/types/project";
 import { getTierForScore } from "@/shared/types/reputation";
@@ -25,7 +26,7 @@ export default function DashboardPage() {
         <Navbar />
         <main className="max-w-4xl mx-auto px-6 mt-12 flex flex-col items-center gap-6">
           <div className="neo-box p-8 bg-[#b7c6c2] text-center w-full">
-            <h1 className="text-3xl font-black uppercase">EduFundX Dashboard</h1>
+            <h1 className="text-xl sm:text-3xl font-black uppercase">EduFundX Dashboard</h1>
             <p className="font-bold text-gray-700 mt-2">
               Connect your Freighter wallet to view your student portfolio, sponsored proposals, and reputation scores.
             </p>
@@ -94,6 +95,7 @@ export default function DashboardPage() {
               )}
             </div>
           </div>
+          <RecentTransactions />
         </div>
 
         {/* Right Column - Dashboards & Project Lists */}
@@ -121,10 +123,10 @@ export default function DashboardPage() {
           {/* Student Dashboard view */}
           {activeTab === "student" && (
             <div className="neo-box p-6 bg-white flex flex-col gap-6">
-              <div className="flex justify-between items-center border-b-2 border-black pb-4">
+              <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 border-b-2 border-black pb-4">
                 <div className="flex items-center gap-2">
                   <FolderHeart className="h-6 w-6 text-black" />
-                  <h2 className="text-2xl font-black uppercase">My Funded Proposals</h2>
+                  <h2 className="text-lg sm:text-2xl font-black uppercase">My Funded Proposals</h2>
                 </div>
                 <Link href="/projects/create" className="neo-btn bg-[#ffe17c] py-1.5 px-3 text-xs font-black uppercase gap-1">
                   <Plus className="h-4 w-4" />
@@ -142,7 +144,7 @@ export default function DashboardPage() {
                     const goalXlm = Number(p.fundingGoal) / 10000000;
                     const sponsoredXlm = Number(p.currentFunding) / 10000000;
                     return (
-                      <div key={p.id} className="border-2 border-black p-4 bg-gray-50 flex items-center justify-between hover:bg-gray-100/50 transition-all">
+                      <div key={p.id} className="border-2 border-black p-4 bg-gray-50 flex flex-col sm:flex-row sm:items-center justify-between gap-3 hover:bg-gray-100/50 transition-all">
                         <div className="flex flex-col gap-1 min-w-0 pr-4">
                           <span className="neo-badge bg-[#b7c6c2] text-[10px] font-black self-start uppercase">
                             {p.category || "Tech"}
@@ -152,7 +154,7 @@ export default function DashboardPage() {
                             Goal: {goalXlm} XLM | Sponsored: {sponsoredXlm} XLM
                           </span>
                         </div>
-                        <div className="flex items-center gap-3 flex-shrink-0">
+                        <div className="flex items-center gap-3 flex-shrink-0 self-end sm:self-auto">
                           <span className={`neo-badge text-xs font-black ${getStatusColor(p.status)}`}>
                             {getStatusLabel(p.status)}
                           </span>
@@ -180,7 +182,7 @@ export default function DashboardPage() {
             <div className="neo-box p-6 bg-white flex flex-col gap-6">
               <div className="flex items-center gap-2 border-b-2 border-black pb-4">
                 <Landmark className="h-6 w-6 text-black" />
-                <h2 className="text-2xl font-black uppercase">My Sponsored Projects</h2>
+                <h2 className="text-lg sm:text-2xl font-black uppercase">My Sponsored Projects</h2>
               </div>
 
               {isLoading ? (
@@ -193,7 +195,7 @@ export default function DashboardPage() {
                     const goalXlm = Number(p.fundingGoal) / 10000000;
                     const sponsoredXlm = Number(p.currentFunding) / 10000000;
                     return (
-                      <div key={p.id} className="border-2 border-black p-4 bg-gray-50 flex items-center justify-between hover:bg-gray-100/50 transition-all">
+                      <div key={p.id} className="border-2 border-black p-4 bg-gray-50 flex flex-col sm:flex-row sm:items-center justify-between gap-3 hover:bg-gray-100/50 transition-all">
                         <div className="flex flex-col gap-1 min-w-0 pr-4">
                           <span className="neo-badge bg-[#b7c6c2] text-[10px] font-black self-start uppercase">
                             {p.category || "Tech"}
@@ -203,7 +205,7 @@ export default function DashboardPage() {
                             Goal: {goalXlm} XLM | Total Sponsored: {sponsoredXlm} XLM
                           </span>
                         </div>
-                        <div className="flex items-center gap-3 flex-shrink-0">
+                        <div className="flex items-center gap-3 flex-shrink-0 self-end sm:self-auto">
                           <span className={`neo-badge text-xs font-black ${getStatusColor(p.status)}`}>
                             {getStatusLabel(p.status)}
                           </span>

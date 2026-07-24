@@ -6,6 +6,7 @@ import { CoreRegistryContract } from "../contract/core-contract";
 import { EscrowContract } from "../contract/escrow-contract";
 import { MilestoneContract } from "../contract/milestone-contract";
 import { toast } from "@/shared/ui/use-toast";
+import { saveTransaction } from "@/shared/lib/utils";
 
 export type TxStep = "IDLE" | "BUILDING" | "SIGNING" | "SUBMITTING" | "PENDING" | "CONFIRMED" | "FAILED";
 
@@ -18,7 +19,8 @@ export function useProjectActions() {
   // Helper to coordinate build -> simulate -> sign -> submit -> wait
   const runTransaction = async (
     buildTxFn: () => Promise<any>,
-    successMessage: string
+    successMessage: string,
+    txType?: string
   ) => {
     if (!address) throw new Error("Wallet not connected");
 
@@ -56,7 +58,18 @@ export function useProjectActions() {
       
       if (waitResult.status === "SUCCESS") {
         setStep("CONFIRMED");
-        toast({ title: "Transaction Confirmed!", description: successMessage, variant: "default" });
+        toast({
+          title: "Transaction Confirmed!",
+          description: successMessage,
+          variant: "success",
+          txHash: hash,
+        });
+
+        saveTransaction({
+          hash,
+          timestamp: Date.now(),
+          type: txType || "Stellar Transaction",
+        });
         
         // Refresh project queries
         queryClient.invalidateQueries({ queryKey: ["projects"] });
@@ -85,7 +98,8 @@ export function useProjectActions() {
           params.category,
           params.fundingGoal
         ),
-        "Your project registry proposal was successfully created!"
+        "Your project registry proposal was successfully created!",
+        "Create Project"
       );
     }
   });
@@ -99,7 +113,8 @@ export function useProjectActions() {
           params.projectId,
           params.amount
         ),
-        `Successfully sponsored project #${params.projectId} with ${Number(params.amount) / 10000000} XLM!`
+        `Successfully sponsored project #${params.projectId} with ${Number(params.amount) / 10000000} XLM!`,
+        "Sponsor Project"
       );
     },
     onSuccess: (_, variables) => {
@@ -119,7 +134,8 @@ export function useProjectActions() {
           params.amount,
           params.reviewer
         ),
-        "Successfully added new milestone proposal!"
+        "Successfully added new milestone proposal!",
+        "Add Milestone"
       );
     },
     onSuccess: (_, variables) => {
@@ -138,7 +154,8 @@ export function useProjectActions() {
           params.index,
           params.proofUrl
         ),
-        `Successfully submitted completion proof for Milestone #${params.index + 1}!`
+        `Successfully submitted completion proof for Milestone #${params.index + 1}!`,
+        "Submit Milestone"
       );
     },
     onSuccess: (_, variables) => {
@@ -157,7 +174,8 @@ export function useProjectActions() {
           params.index,
           params.approved
         ),
-        `Successfully marked Milestone #${params.index + 1} as ${params.approved ? "Approved" : "Rejected"}!`
+        `Successfully marked Milestone #${params.index + 1} as ${params.approved ? "Approved" : "Rejected"}!`,
+        "Review Milestone"
       );
     },
     onSuccess: (_, variables) => {
@@ -174,7 +192,8 @@ export function useProjectActions() {
           address!,
           params.projectId
         ),
-        "Successfully claimed your refund for the cancelled project!"
+        "Successfully claimed your refund for the cancelled project!",
+        "Refund Sponsor"
       );
     },
     onSuccess: (_, variables) => {
@@ -191,7 +210,8 @@ export function useProjectActions() {
           params.projectId,
           1 // 1 = Active
         ),
-        "Your project is now active and open for sponsorship!"
+        "Your project is now active and open for sponsorship!",
+        "Activate Project"
       );
     },
     onSuccess: (_, variables) => {

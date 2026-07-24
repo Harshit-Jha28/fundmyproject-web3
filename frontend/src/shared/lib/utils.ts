@@ -69,3 +69,33 @@ export function getExplorerAccountUrl(address: string): string {
 export function sleep(ms: number): Promise<void> {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
+
+export interface SavedTransaction {
+  hash: string;
+  timestamp: number;
+  type: string;
+}
+
+export function saveTransaction(tx: SavedTransaction): void {
+  if (typeof window === "undefined") return;
+  try {
+    const stored = localStorage.getItem("edufundx_txs");
+    const txs: SavedTransaction[] = stored ? JSON.parse(stored) : [];
+    const updated = [tx, ...txs].slice(0, 20);
+    localStorage.setItem("edufundx_txs", JSON.stringify(updated));
+    window.dispatchEvent(new Event("edufundx_new_tx"));
+  } catch (err) {
+    console.error("Failed to save transaction:", err);
+  }
+}
+
+export function getTransactions(): SavedTransaction[] {
+  if (typeof window === "undefined") return [];
+  try {
+    const stored = localStorage.getItem("edufundx_txs");
+    return stored ? JSON.parse(stored) : [];
+  } catch (err) {
+    console.error("Failed to get transactions:", err);
+    return [];
+  }
+}

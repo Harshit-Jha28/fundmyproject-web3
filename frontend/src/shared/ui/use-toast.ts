@@ -13,6 +13,7 @@ type ToasterToast = {
   description?: string;
   variant?: ToastVariant;
   duration?: number;
+  txHash?: string;
 };
 
 const actionTypes = {
@@ -103,14 +104,15 @@ interface ToastOptions {
   description?: string;
   variant?: ToastVariant;
   duration?: number;
+  txHash?: string;
 }
 
-function toast({ title, description, variant = "default", duration = TOAST_REMOVE_DELAY }: ToastOptions) {
+function toast({ title, description, variant = "default", duration = TOAST_REMOVE_DELAY, txHash }: ToastOptions) {
   const id = genId();
 
   dispatch({
     type: "ADD_TOAST",
-    toast: { id, title, description, variant, duration },
+    toast: { id, title, description, variant, duration, txHash },
   });
 
   addToRemoveQueue(id, duration);

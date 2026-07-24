@@ -19,7 +19,7 @@ export function ConnectButton() {
 
   if (isConnecting) {
     return (
-      <button className="neo-btn-black h-12 gap-2" disabled>
+      <button className="neo-btn-black h-10 sm:h-12 gap-1.5 sm:gap-2 text-xs sm:text-base" disabled>
         <Loader2 className="h-4 w-4 animate-spin" />
         Connecting...
       </button>
@@ -30,7 +30,7 @@ export function ConnectButton() {
     return (
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <button className="neo-btn h-12 gap-2">
+          <button className="neo-btn h-10 sm:h-12 gap-1.5 sm:gap-2 text-sm sm:text-base px-2 sm:px-4">
             <Wallet className="h-4 w-4" />
             <span>{formatAddress(address)}</span>
             <span className="hidden sm:inline-block ml-1 px-1.5 py-0.5 text-xs bg-black text-[#ffe17c] font-black">
@@ -60,7 +60,7 @@ export function ConnectButton() {
   }
 
   return (
-    <button onClick={() => connect()} className="neo-btn-black h-12 gap-2">
+    <button onClick={() => connect()} className="neo-btn-black h-10 sm:h-12 gap-1.5 sm:gap-2 text-xs sm:text-base px-3 sm:px-4">
       <Wallet className="h-4 w-4" />
       Connect Wallet
     </button>

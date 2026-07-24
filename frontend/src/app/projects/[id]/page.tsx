@@ -169,19 +169,19 @@ export default function ProjectDetailsPage() {
               </span>
             </div>
 
-            <h1 className="text-3xl md:text-4xl font-black uppercase tracking-tight">{project.title}</h1>
+            <h1 className="text-xl sm:text-3xl md:text-4xl font-black uppercase tracking-tight">{project.title}</h1>
             <p className="font-bold text-gray-700 leading-relaxed">{project.description}</p>
 
             {/* Creator details */}
-            <div className="flex items-center gap-4 mt-4 pt-4 border-t border-black/10">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-4 mt-4 pt-4 border-t border-black/10">
               <div className="w-10 h-10 bg-[#ffe17c] border-2 border-black flex items-center justify-center font-black">
                 S
               </div>
               <div className="flex flex-col">
                 <span className="text-xs text-gray-500 font-bold uppercase">Student Address</span>
-                <span className="font-mono text-sm truncate max-w-xs md:max-w-md">{project.student}</span>
+                <span className="font-mono text-sm truncate max-w-[200px] sm:max-w-xs md:max-w-md">{project.student}</span>
               </div>
-              <div className="flex items-center gap-1 ml-auto text-[#ffbc2e]">
+              <div className="flex items-center gap-1 ml-0 sm:ml-auto mt-2 sm:mt-0 text-[#ffbc2e]">
                 <Award className="h-5 w-5 text-black" />
                 <span className="font-black text-black">Reputation: {rep?.score || 0}</span>
               </div>
@@ -190,7 +190,7 @@ export default function ProjectDetailsPage() {
 
           {/* Milestones Flow */}
           <div className="neo-box p-8 bg-white flex flex-col gap-6">
-            <div className="flex justify-between items-center border-b-2 border-black pb-4">
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 border-b-2 border-black pb-4">
               <h2 className="text-2xl font-black uppercase tracking-tight">Project Milestones</h2>
               
               {/* Add Milestone trigger (Draft only, student only) */}
@@ -202,7 +202,7 @@ export default function ProjectDetailsPage() {
                       Add Milestone
                     </button>
                   </DialogTrigger>
-                  <DialogContent className="neo-box border-2 border-black rounded-none bg-white p-6 w-full max-w-md">
+                  <DialogContent className="neo-box border-2 border-black rounded-none bg-white p-6 w-full max-w-[calc(100vw-2rem)] sm:max-w-md">
                     <DialogHeader>
                       <DialogTitle className="text-2xl font-black uppercase">Add Milestone Proposal</DialogTitle>
                     </DialogHeader>
@@ -276,7 +276,7 @@ export default function ProjectDetailsPage() {
 
                   return (
                     <div key={ms.id} className="border-2 border-black p-4 bg-gray-50 flex flex-col gap-3 relative">
-                      <div className="flex items-center justify-between">
+                      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2">
                         <div className="flex items-center gap-2">
                           <span className="w-6 h-6 bg-black text-[#ffe17c] font-black text-xs flex items-center justify-center">
                             {index + 1}
@@ -315,7 +315,7 @@ export default function ProjectDetailsPage() {
                                 Submit Proof
                               </button>
                             </DialogTrigger>
-                            <DialogContent className="neo-box border-2 border-black rounded-none bg-white p-6 w-full max-w-md">
+                            <DialogContent className="neo-box border-2 border-black rounded-none bg-white p-6 w-full max-w-[calc(100vw-2rem)] sm:max-w-md">
                               <DialogHeader>
                                 <DialogTitle className="text-2xl font-black uppercase">Submit Completion Proof</DialogTitle>
                               </DialogHeader>
@@ -392,7 +392,7 @@ export default function ProjectDetailsPage() {
               ></div>
             </div>
 
-            <div className="flex items-center gap-1 text-2xl font-black mt-2">
+            <div className="flex items-center gap-1 text-lg sm:text-2xl font-black mt-2 flex-wrap">
               <Coins className="h-6 w-6" />
               <span>{currentXlm.toLocaleString()} / {goalXlm.toLocaleString()} XLM</span>
             </div>
@@ -423,7 +423,7 @@ export default function ProjectDetailsPage() {
                         Sponsor Project
                       </button>
                     </DialogTrigger>
-                    <DialogContent className="neo-box border-2 border-black rounded-none bg-white p-6 w-full max-w-md">
+                    <DialogContent className="neo-box border-2 border-black rounded-none bg-white p-6 w-full max-w-[calc(100vw-2rem)] sm:max-w-md">
                       <DialogHeader>
                         <DialogTitle className="text-2xl font-black uppercase">Sponsor Academic Project</DialogTitle>
                       </DialogHeader>

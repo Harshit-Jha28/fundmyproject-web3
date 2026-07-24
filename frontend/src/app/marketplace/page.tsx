@@ -32,7 +32,7 @@ export default function MarketplacePage() {
       <main className="max-w-7xl mx-auto px-6 md:px-12 mt-12 flex flex-col gap-8">
         {/* Banner */}
         <div className="neo-box p-8 bg-[#b7c6c2] flex flex-col gap-3">
-          <h1 className="text-4xl font-black uppercase tracking-tight">Project Marketplace</h1>
+          <h1 className="text-2xl sm:text-4xl font-black uppercase tracking-tight">Project Marketplace</h1>
           <p className="font-bold text-gray-700 max-w-xl">
             Browse and sponsor verified academic and innovation projects directly via Soroban smart contract escrows.
           </p>
@@ -41,7 +41,7 @@ export default function MarketplacePage() {
         {/* Filters and Search */}
         <div className="flex flex-col lg:flex-row gap-4 items-stretch lg:items-center justify-between">
           {/* Search bar */}
-          <div className="relative flex-grow max-w-lg">
+          <div className="relative flex-grow max-w-full lg:max-w-lg">
             <Search className="absolute left-3 top-3.5 h-5 w-5 text-gray-500" />
             <input
               type="text"
