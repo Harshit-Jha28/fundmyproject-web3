@@ -2,6 +2,7 @@ import "@/app/globals.css";
 import React from "react";
 import { Providers } from "./providers";
 import { Toaster } from "@/shared/ui/toaster";
+import { Analytics } from "@vercel/analytics/next";
 
 export const metadata = {
   title: "EduFundX — Decentralized Student Project Sponsorship",
@@ -21,6 +22,7 @@ export default function RootLayout({
           {children}
           <Toaster />
         </Providers>
+        <Analytics />
       </body>
     </html>
   );
