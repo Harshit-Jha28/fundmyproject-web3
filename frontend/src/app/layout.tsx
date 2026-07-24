@@ -3,6 +3,7 @@ import React from "react";
 import { Providers } from "./providers";
 import { Toaster } from "@/shared/ui/toaster";
 import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 export const metadata = {
   title: "EduFundX — Decentralized Student Project Sponsorship",
@@ -23,6 +24,7 @@ export default function RootLayout({
           <Toaster />
         </Providers>
         <Analytics />
+         <SpeedInsights />
       </body>
     </html>
   );
