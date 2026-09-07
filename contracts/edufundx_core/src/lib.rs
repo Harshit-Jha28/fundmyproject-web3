@@ -18,9 +18,7 @@ use storage::{
     has_escrow_contract, has_milestone_contract, Project, ProjectStatus,
 };
 
-// ---------------------------------------------------------------------------
 // Reputation Contract Client Definition
-// ---------------------------------------------------------------------------
 
 #[contractclient(name = "ReputationClient")]
 pub trait ReputationInterface {
@@ -53,16 +51,13 @@ pub trait ReputationInterface {
     ) -> Result<(), soroban_sdk::Error>;
 }
 
-// ---------------------------------------------------------------------------
 // Contract implementation
-// ---------------------------------------------------------------------------
 
 #[contract]
 pub struct EduFundXCore;
 
 #[contractimpl]
 impl EduFundXCore {
-    // ----- Initialization --------------------------------------------------
 
     pub fn initialize(
         env: Env,
@@ -87,10 +82,6 @@ impl EduFundXCore {
         Ok(())
     }
 
-    // ----- Project Registry Core Functions ---------------------------------
-
-    /// Creates a new student project with a draft status.
-    /// Initiates a cross-contract call to `edufundx_reputation` to log student's action.
     pub fn create_project(
         env: Env,
         student: Address,
@@ -121,7 +112,6 @@ impl EduFundXCore {
         set_project(&env, project_id, &project);
 
         // Notify reputation contract about project creation.
-        // The core contract passes `env.current_contract_address()` as the caller.
         let rep_contract_id = get_reputation_contract(&env);
         let rep_client = ReputationClient::new(&env, &rep_contract_id);
         
@@ -133,7 +123,6 @@ impl EduFundXCore {
     }
 
     /// Updates details of an existing project.
-    /// Can only be performed by the project owner (student) while it's in Draft status.
     pub fn update_project(
         env: Env,
         student: Address,
@@ -150,8 +139,6 @@ impl EduFundXCore {
         if project.student != student {
             return Err(CoreContractError::Unauthorized);
         }
-
-        // Project details can only be modified while in Draft
         if project.status != ProjectStatus::Draft {
             return Err(CoreContractError::InvalidStatusTransition);
         }
@@ -172,8 +159,6 @@ impl EduFundXCore {
         Ok(())
     }
 
-    /// Modifies project status (e.g. activating it or cancelling it).
-    /// Access controls depend on the status transition.
     pub fn update_project_status(
         env: Env,
         caller: Address,
@@ -196,23 +181,20 @@ impl EduFundXCore {
             return Ok(());
         }
 
-        // Logic checks for status transitions:
+      
         match (project.status, new_status) {
-            // Student activates Draft project
+           
             (ProjectStatus::Draft, ProjectStatus::Active) => {
                 if project.student != caller {
                     return Err(CoreContractError::Unauthorized);
                 }
             }
-            // Admin cancels project
             (_, ProjectStatus::Cancelled) => {
                 let admin = get_admin(&env);
                 if caller != admin {
                     return Err(CoreContractError::Unauthorized);
                 }
             }
-            // Transitioning to FullyFunded, Completed, Draft etc. from other states:
-            // Escrow or Milestone contracts will typically invoke status updates, or admin.
             _ => {
                 let admin = get_admin(&env);
                 let is_escrow = has_escrow_contract(&env) && caller == get_escrow_contract(&env);
@@ -231,8 +213,6 @@ impl EduFundXCore {
         extend_instance_ttl(&env);
         Ok(())
     }
-
-    // ----- Fetch/View functions --------------------------------------------
 
     pub fn get_project(env: Env, id: u64) -> Result<Project, CoreContractError> {
         get_project(&env, id)
@@ -257,8 +237,6 @@ impl EduFundXCore {
     pub fn get_admin(env: Env) -> Address {
         get_admin(&env)
     }
-
-    // ----- Configuration Setters (Admin-only) -------------------------------
 
     pub fn set_escrow_contract(env: Env, admin: Address, escrow: Address) -> Result<(), CoreContractError> {
         admin.require_auth();
@@ -288,7 +266,6 @@ impl EduFundXCore {
         get_milestone_contract(&env)
     }
 
-    /// Retrieve all projects registered by a specific student owner address
     pub fn get_projects_by_owner(env: Env, owner: Address) -> soroban_sdk::Vec<Project> {
         let count = get_project_count(&env);
         let mut result = soroban_sdk::Vec::new(&env);
@@ -302,7 +279,6 @@ impl EduFundXCore {
         result
     }
 
-    // ----- Reputation Forwarding (Escrow/Milestone-only) ---------------------
 
     pub fn record_contribution_rep(
         env: Env,
@@ -365,9 +341,6 @@ impl EduFundXCore {
         Ok(())
     }
 
-    // ----- Admin & Maintenance ---------------------------------------------
-
-    /// Upgrade the contract WASM. Admin-only.
     pub fn upgrade(
         env: Env,
         admin: Address,
