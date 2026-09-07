@@ -39,13 +39,8 @@ export default function DashboardPage() {
     );
   }
 
-  // Filter projects owned by the user (student view)
   const studentProjects = projects?.filter((p) => p.student === address) || [];
 
-  // Filter projects sponsored by the user (sponsor view)
-  // For MVP/simulation, we can show projects where user has contributed. We'd check if sponsorship > 0.
-  // Since we don't fetch all sponsorships in one call, we can mock/simulate this or display projects sponsored in local cache.
-  // Let's filter by checking if project status is Active/FullyFunded/Completed and showing a list where user can click.
   const sponsoredProjects = projects?.filter((p) => p.student !== address && p.currentFunding > 0n) || [];
 
   const repScore = activeTab === "student" ? studentRep?.score || 0 : sponsorRep?.score || 0;
@@ -56,11 +51,11 @@ export default function DashboardPage() {
       <Navbar />
 
       <main className="max-w-7xl mx-auto px-6 md:px-12 mt-12 grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
-        {/* Left Column - Wallet Info & Reputation Card */}
+        {}
         <div className="flex flex-col gap-6">
           <WalletInfo />
 
-          {/* Reputation Stats Box */}
+          {}
           <div className="neo-box p-6 bg-white flex flex-col gap-4">
             <h3 className="font-black text-xl uppercase border-b-2 border-black pb-2">Reputation Tier</h3>
             
@@ -98,9 +93,9 @@ export default function DashboardPage() {
           <RecentTransactions />
         </div>
 
-        {/* Right Column - Dashboards & Project Lists */}
+        {}
         <div className="lg:col-span-2 flex flex-col gap-6">
-          {/* Dashboard Tabs */}
+          {}
           <div className="flex border-2 border-black bg-white p-1">
             <button
               onClick={() => setActiveTab("student")}
@@ -120,7 +115,7 @@ export default function DashboardPage() {
             </button>
           </div>
 
-          {/* Student Dashboard view */}
+          {}
           {activeTab === "student" && (
             <div className="neo-box p-6 bg-white flex flex-col gap-6">
               <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 border-b-2 border-black pb-4">
@@ -177,7 +172,7 @@ export default function DashboardPage() {
             </div>
           )}
 
-          {/* Sponsor Dashboard view */}
+          {}
           {activeTab === "sponsor" && (
             <div className="neo-box p-6 bg-white flex flex-col gap-6">
               <div className="flex items-center gap-2 border-b-2 border-black pb-4">
