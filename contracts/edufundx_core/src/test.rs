@@ -42,7 +42,6 @@ fn test_initialize() {
     assert_eq!(core_client.get_platform_fee_bps(), 250);
     assert_eq!(core_client.get_project_count(), 0);
 
-    // Initializing again should panic
     let result = core_client.try_initialize(&admin, &rep_id, &token, &250);
     assert!(result.is_err());
 }
@@ -71,7 +70,6 @@ fn test_create_project() {
     assert_eq!(project.total_sponsored, 0);
     assert_eq!(project.status, ProjectStatus::Draft);
 
-    // Reputation contract should be updated with project created reputation (+5 score)
     let rep = rep_client.get_student_reputation(&student);
     assert_eq!(rep.score, 5);
     assert_eq!(rep.projects_created, 1);
@@ -102,12 +100,10 @@ fn test_update_project() {
     assert_eq!(project.category, new_cat);
     assert_eq!(project.funding_goal, new_goal);
 
-    // Attempting to update status to Active
-    core_client.update_project_status(&student, &proj_id, &1_u32); // 1 = Active
+    core_client.update_project_status(&student, &proj_id, &1_u32);
     let project_active: Project = core_client.get_project(&proj_id);
     assert_eq!(project_active.status, ProjectStatus::Active);
 
-    // Updating project after it is Active should fail
     let err = core_client.try_update_project(&student, &proj_id, &new_title, &new_desc, &new_cat, &new_goal);
     assert!(err.is_err());
 }
@@ -125,7 +121,7 @@ fn test_update_project_status_authorization() {
 
     let proj_id = core_client.create_project(&student, &title, &desc, &cat, &goal);
 
-    // Rando cannot activate the project
+
     let result = core_client.try_update_project_status(&rando, &proj_id, &1_u32);
     assert!(result.is_err());
 
@@ -134,8 +130,7 @@ fn test_update_project_status_authorization() {
     let project = core_client.get_project(&proj_id);
     assert_eq!(project.status, ProjectStatus::Active);
 
-    // Student cannot cancel the project directly (only admin can cancel)
-    let result = core_client.try_update_project_status(&student, &proj_id, &4_u32); // 4 = Cancelled
+    let result = core_client.try_update_project_status(&student, &proj_id, &4_u32); 
     assert!(result.is_err());
 
     // Admin can cancel the project
@@ -158,11 +153,9 @@ fn test_get_projects_by_owner() {
     let cat = String::from_str(&env, "Cat");
     let goal = 1000_i128;
 
-    // student A creates 2 projects
     let id1 = core_client.create_project(&student_a, &title_1, &desc, &cat, &goal);
     let id2 = core_client.create_project(&student_a, &title_2, &desc, &cat, &goal);
     
-    // student B creates 1 project
     let id3 = core_client.create_project(&student_b, &title_3, &desc, &cat, &goal);
 
     let projects_a = core_client.get_projects_by_owner(&student_a);
